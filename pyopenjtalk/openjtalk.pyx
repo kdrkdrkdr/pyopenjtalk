@@ -255,7 +255,7 @@ cdef class OpenJTalk(object):
                 p = n["string"]
             else:
                 p = n["pron"]
-                if (for_ko and "助詞" in n["pos"]) and (len(njd_features)-1 != idx and not "助詞" in njd_features[idx+1]["pos"]):
+                if (for_ko and "助詞" in n["pos"]) and (len(njd_features)-1 != idx and not "助詞" in njd_features[idx+1]["pos"] and not "記号" in njd_features[idx+1]["pos"]):
                     p += ' '
                     
             # remove special chars
