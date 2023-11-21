@@ -236,7 +236,7 @@ cdef class OpenJTalk(object):
 
         return labels
 
-    def g2p(self, text, kana=False, join=True):
+    def g2p(self, text, kana=False, join=True, for_ko=False):
         """Grapheme-to-phoeneme (G2P) conversion
         """
         njd_features = self.run_frontend(text)
@@ -254,7 +254,10 @@ cdef class OpenJTalk(object):
             if n["pos"] == "記号":
                 p = n["string"]
             else:
-                p = n["pron"]
+                if for_ko and n["pos"] == "助詞"
+                    p = n["pron"]+' '
+                else:
+                    p = n["pron"]
             # remove special chars
             for c in "’":
                 p = p.replace(c,"")
