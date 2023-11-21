@@ -251,11 +251,14 @@ cdef class OpenJTalk(object):
         # kana
         prons = []
         for idx, n in enumerate(njd_features):
+            isEOS = len(njd_features)-1 == idx
             if n["pos"] == "記号":
                 p = n["string"]
+                if for_ko and (not isEOS) and (not "記号" in njd_features[idx+1]["pos"]):
+                    p += ' '
             else:
                 p = n["pron"]
-                if (for_ko and "助詞" in n["pos"]) and (len(njd_features)-1 != idx and not "助詞" in njd_features[idx+1]["pos"] and not "記号" in njd_features[idx+1]["pos"]):
+                if (for_ko and "助詞" in n["pos"]) and (not isEOS) and (not "助詞" in njd_features[idx+1]["pos"]) and (not "記号" in njd_features[idx+1]["pos"])):
                     p += ' '
                     
             # remove special chars
