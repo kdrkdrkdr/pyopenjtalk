@@ -254,7 +254,7 @@ cdef class OpenJTalk(object):
             if n["pos"] == "記号":
                 p = n["string"]
             else:
-                if for_ko and n["pos"] == "助詞"
+                if for_ko and n["pos"].startswith("助詞"):
                     p = n["pron"]+' '
                 else:
                     p = n["pron"]
